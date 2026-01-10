@@ -198,12 +198,38 @@
     .center{
       text-align: center;
     }
+
+    .hero-gif{
+     display: flex;
+     justify-content: center;
+     margin: 18px 0 12px;
+     pointer-events: none;
+   }
+
+   .hero-gif img{
+     width: clamp(220px, 36vw, 420px);
+     max-width: 100%;
+     height: auto;
+     border-radius: 12px;
+     border: 1px solid var(--card-border);
+     box-shadow: 0 10px 30px rgba(0,0,0,.45);
+     opacity: .98;
+     display: block;
+   }
+
+   @media (prefers-reduced-motion: reduce){
+     .hero-gif img{ animation: none; }
+   }
   </style>
 </head>
 
 <body>
   <main class="wrap">
     <h1 class="center">We Have to Go Back — ao final de Lost</h1>
+
+      <figure class="hero-gif" aria-hidden="true">
+        <img src="public/we_have_to_go_back_lost.gif" alt="Jack — final" loading="lazy">
+      </figure>
 
     <div class="divider"></div>
       <h4>O EPISÓDIO FINAL</h4>
@@ -250,6 +276,10 @@
 
       <p>Não por acaso, o sideways soa como uma colagem emocional, um “melhores momentos” íntimo: ele junta pares, amizades, reconciliações, identidades e temas que o público já carregava. Ele prioriza memória e reconhecimento porque é exatamente isso que o espectador faz ao terminar uma série que viveu por anos: lembrar do que viveu acompanhando aqueles personagens como se fossem reais.</p>
 
+      <figure class="hero-gif" aria-hidden="true">
+        <img src="public/hurley_charlie.gif" alt="Jack — final" loading="lazy">
+      </figure>
+
       <p>O sideways é, ao mesmo tempo, pós-vida dos personagens e pós-série do espectador: um espaço fora do tempo criado pela necessidade humana de encerramento — dos personagens, dos criadores, de quem assistiu. Não no sentido de “olha como somos inteligentes”, mas no sentido de aceitar uma verdade simples: no fim, o que “fica” não é a geografia da ilha; é o laço — é aquilo que eles significaram uns para os outros e para nós, o público.</p>
 
       <p>Esse final propõe que o encerramento de uma longa história é, também, um ritual. A igreja e o “seguir em frente” funcionam como despedida dos personagens, mas também como ritualização do encerramento do público.</p>
@@ -280,6 +310,10 @@
 
       <p>Jack começa preso à vontade de querer consertar tudo — como se a vida fosse um problema a ser resolvido. Termina aceitando que fez o suficiente. Morre em paz, algo que nunca teve em vida. O homem que tentava controlar, encontra a maturidade de cumprir o papel e, depois, largá-lo.</p>
 
+      <figure class="hero-gif" aria-hidden="true">
+        <img src="public/jack_the_end.gif" alt="Jack — final" loading="lazy">
+      </figure>
+
       <p>Dentro desse desenho, o flash-sideways faz sentido também como um contraponto natural da ilha. Já que ele é o lugar que permite que as feridas se cicatrizem. Ele reúne e relembra para libertar. E ele liberta não por punição ou julgamento, mas por reconhecimento: reconhecer a si, reconhecer o outro, reconhecer o que foi real — e, ao reconhecer, parar de precisar repetir.</p>
 
       <h4>O FIM</h4>
@@ -292,6 +326,10 @@
       Quem acompanhou pessoas, se emociona.</p>
 
       <p>Lost termina exatamente onde sempre esteve: em pessoas tentando dar sentido ao que viveram. E, quando finalmente conseguem, aprendendo a seguir em frente. Porque o que importou foi quem eles se tornaram e o que significaram uns para os outros. E, por extensão, o que significaram para nós.</p>
+
+      <figure class="hero-gif" aria-hidden="true">
+        <img src="public/jack_the_end_sideways.gif" alt="Jack — final" loading="lazy">
+      </figure>
 
     <div class="divider"></div>
 
