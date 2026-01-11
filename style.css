@@ -249,13 +249,53 @@ h4 {
 }
 
 @media (max-width: 520px){
+  .site-footer{
+    padding: 12px 14px;
+    margin: 0 auto 52px;
+  }
+
   .footer-actions{
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 44px;
+    gap: 10px;
+    align-items: stretch;
   }
+
+  /* Linha 1: Voltar + Share */
+  #btnTop{
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+  }
+
+  #btnShare{
+    grid-column: 2;
+    grid-row: 1;
+    width: 44px;
+    height: 44px;
+    justify-self: end;
+  }
+
+  /* Linha 2: Extra (full width) */
+  #btnExtra{
+    grid-column: 1 / -1;
+    grid-row: 2;
+    width: 100%;
+    text-align: center;
+  }
+
   .footer-btn{
-    flex: 1 1 auto;
+    width: 100%;
+    padding: 12px 12px;
+    font-size: .78rem;
+    letter-spacing: .06em;
+    white-space: normal;   /* permite quebrar linha no botão longo */
+    line-height: 1.15;
   }
+
+  /* mantém o ícone quadrado */
   .footer-btn--icon{
-    flex: 0 0 auto;
+    padding: 0;
+    white-space: nowrap;
   }
 }
