@@ -12,6 +12,7 @@
   <title>LOST | The End</title>
   <meta name="description" content="Um ensaio sobre o final de Lost: o que o episódio encerra, o que ele revela, e por que voltar ao fim muda a série inteira." />
   <link rel="canonical" href="https://seeyouinanotherlifebrother.com.br/" />
+  <link rel="stylesheet" href="style.css">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta http-equiv="Content-Language" content="pt-br" />
   <meta property="og:type" content="article" />
@@ -60,167 +61,7 @@
     "url": "https://seeyouinanotherlifebrother.com.br/"
   }
   </script>
-  <style>
-    :root{
-      /* Jungle Noir */
-      --bg: #070a08;
-      --fg: #f0f0ea;
-      --muted: rgba(240,240,234,.74);
-      --accent: #7ee787;
-
-      --card: rgba(255,255,255,.04);
-      --card-border: rgba(126,231,135,.12);
-
-      --font-h: "Montserrat", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-      --font-p: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-
-      --h1-size: clamp(2rem, 4vw, 3.2rem);
-      --h2-size: clamp(1.35rem, 2.2vw, 1.85rem);
-
-      --p-size: 1.05rem;
-      --p-leading: 1.7;
-
-      --h1-tracking: .14em;
-      --h1-weight: 700;
-
-      --h2-tracking: .08em;
-      --h2-weight: 600;
-
-      --p-weight: 400;
-
-      --noise-opacity: .06;
-      --vignette: radial-gradient(1200px 700px at 50% 18%,
-        rgba(126,231,135,.05),
-        rgba(0,0,0,.62) 55%,
-        rgba(0,0,0,.90) 100%);
-    }
-
-    *{ box-sizing: border-box; }
-
-    body{
-      margin: 0;
-      min-height: 100vh;
-      background: var(--bg);
-      color: var(--fg);
-      font-family: var(--font-p);
-      letter-spacing: .01em;
-    }
-
-    /* Fundo com vignette + “grain” */
-    body::before{
-      content:"";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background: var(--vignette);
-      z-index: 0;
-    }
-    body::after{
-      content:"";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background-image:
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
-      opacity: var(--noise-opacity);
-      mix-blend-mode: overlay;
-      z-index: 0;
-    }
-
-    .wrap{
-      position: relative;
-      z-index: 1;
-      width: min(980px, 92vw);
-      margin: 92px auto 64px;
-      padding: 28px 22px;
-      background: var(--card);
-      border: 1px solid var(--card-border);
-      border-radius: 18px;
-      backdrop-filter: blur(8px);
-    }
-
-    /* Padronização de headings e parágrafos */
-    h1,h2,h3,h4,h5,h6{
-      font-family: var(--font-h);
-      color: var(--fg);
-      margin: 0;
-    }
-
-    h1{
-      font-size: var(--h1-size);
-      font-weight: var(--h1-weight);
-      letter-spacing: var(--h1-tracking);
-      text-transform: uppercase;
-      line-height: 1.06;
-    }
-
-    /* “Frase” final (maior que p, menor que h1) */
-    h2{
-      font-size: var(--h2-size);
-      font-weight: var(--h2-weight);
-      letter-spacing: var(--h2-tracking);
-      line-height: 1.2;
-      text-transform: uppercase;
-    }
-
-    p{
-      font-family: var(--font-p);
-      font-size: var(--p-size);
-      font-weight: var(--p-weight);
-      line-height: var(--p-leading);
-      color: var(--muted);
-      margin: 0;
-    }
-
-    p + p{
-      margin-top: 14px;      /* espaço entre parágrafos consecutivos */
-    }
-
-    h1,h2,h3,h4,h5,h6{
-      margin: 26px 0 10px;   /* topo / baixo */
-      line-height: 1.2;
-    }
-
-    /* Seu h4 como “seção” */
-    h4{
-      font-size: 1.05rem;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-    }
-
-    .divider{
-      height: 1px;
-      background: linear-gradient(to right, transparent, rgba(255,255,255,.18), transparent);
-      margin: 24px 0;
-    }
-
-    /* Centralização apenas do título e da frase */
-    .center{
-      text-align: center;
-    }
-
-    .hero-gif{
-     display: flex;
-     justify-content: center;
-     margin: 18px 0 12px;
-     pointer-events: none;
-   }
-
-   .hero-gif img{
-     width: clamp(220px, 36vw, 420px);
-     max-width: 100%;
-     height: auto;
-     border-radius: 12px;
-     border: 1px solid var(--card-border);
-     box-shadow: 0 10px 30px rgba(0,0,0,.45);
-     opacity: .98;
-     display: block;
-   }
-
-   @media (prefers-reduced-motion: reduce){
-     .hero-gif img{ animation: none; }
-   }
-  </style>
+  
 </head>
 
 <body>
@@ -248,21 +89,21 @@
         <img src="public/christian.gif" alt="Jack — final" loading="lazy">
       </figure>
 
+      <h4>FLASH-SIDEWAYS</h4>
+
       <p>Os flash-sideways, sim, são uma realidade intermediária, não linear. Não um universo paralelo, mas sim um “lugar de encontro” criado após a morte de cada um, onde suas consciências se conectam, criando essa realidade espiritual fora do tempo, que existe para que aquelas pessoas que viveram juntas experiências tão significativas se encontrem novamente, se curem e ajudem umas às outras a aceitar o fim.</p>
 
+      <p>Mas ele não apaga o vivido, nem reescreve a história; ele revela o que sobrou dela quando a poeira baixa.</p>
+      
       <figure class="hero-gif" aria-hidden="true">
         <img src="public/sawyer-tv.gif" alt="Jack — final" loading="lazy">
       </figure>
     
-      <p>Mas ele não apaga o vivido, nem reescreve a história; ele revela o que sobrou dela quando a poeira baixa.</p>
+      <p>O que confunde é que Lost escolhe apresentar o flash-sideways sem didatismo. Ela prefere trabalhar com símbolos e sentimentos a parágrafos explicativos. O que está “fora do tempo” não é a aventura na ilha; é o espaço em que aquilo pode ser finalmente digerido.</p>
 
-      <h4>FLASH-SIDEWAYS</h4>
+      <p>Por isso o flash-sideways é tão mal-entendido. Porque ele parece, na superfície, o novo mistério da temporada, no entanto, ele não é um mistério para ser solucionado. É uma resolução para ser vivida. E não no sentido técnico, como um purgatório católico com regras rígidas; mas no sentido íntimo: um espaço simbólico de reconciliação, onde os personagens finalmente se encontram sem o ruído da sobrevivência e sem a urgência da ilha. É um espaço que existe para que eles se reconheçam, se perdoem, <b>se escolham de novo</b> — e então consigam seguir em frente.</p>
 
-      <p>O que confunde é que Lost escolhe apresentar o flash-sideways sem didatismo. Ela prefere trabalhar com símbolos, prefere o sentimento a um parágrafo explicativo. O que está “fora do tempo” não é a aventura na ilha; é o espaço em que aquilo pode ser finalmente digerido.</p>
-
-      <p>Por isso o flash-sideways é tão mal-entendido. Porque ele parece, na superfície, um novo enigma e, no entanto, ele não é um mistério para ser solucionado. É uma resolução para ser vivida. E não no sentido técnico, como um purgatório católico com regras rígidas; mas no sentido íntimo: um espaço simbólico de reconciliação, onde os personagens finalmente se encontram sem o ruído da sobrevivência e sem a urgência da ilha. É um espaço que existe para que eles se reconheçam, se perdoem, se escolham de novo — e então consigam seguir em frente.</p>
-
-      <p>Se a ilha foi um território de transformação — que testa, quebra e obriga a mudança — o sideways é o gesto final: reúne, aceita, libera. Não é o “fim da trama”; é o “fim da necessidade”. Quando a história já não precisa empurrar ninguém pra frente. Não há mais nada a provar, corrigir ou sobreviver. Viver deixou de ser uma reação e passou a ser uma escolha.</p>
+      <p>Se a ilha foi o território de transformação — que testa, quebra e obriga a mudança — o sideways é o gesto final: reúne, aceita, libera. Não é o “fim da trama”; é o “fim da necessidade”. Quando a história já não precisa empurrar ninguém pra frente. Não há mais nada a provar, corrigir ou sobreviver. Viver deixou de ser uma reação e passou a ser uma escolha.</p>
 
       <h4>CHARACTER-DRIVEN</h4>
 
@@ -270,11 +111,15 @@
 
       <p>O final expõe esse conflito real dos espectadores: parte queria respostas para a ilha; parte queria a conclusão das pessoas. Os criadores deliberadamente vão pelo segundo caminho — e por isso divide. Eles escolhem significado acima de engenhosidade. Porque o que importa não é entender a ilha, é entender o que a ilha fez com as pessoas.</p>
 
-      <p>Terminar falando de fechamento emocional não é “mudar de assunto” no último minuto. Não é regressão; é coerência temática. No fim, a série sempre foi inclinada a priorizar personagens acima de plot. Não é uma exclusividade do final, mas sim um método narrativo.</p>
+      <p>Terminar falando de fechamento emocional não é “mudar de assunto” no último minuto. Não é regressão, nem uma exclusividade do final — Mas sim, um método narrativo que mantém coerência temática. A série sempre foi inclinada a priorizar personagens acima de plot. Os mistérios tendiam a receber resolução quando isso impactava as decisões dos personagens. Se não, ficavam como atmosfera, como mito, como densidade — como a vida real, aliás, que raramente se explica por completo.</p>
+
+      <figure class="hero-gif" aria-hidden="true">
+        <img src="public/kate.gif" alt="Jack — final" loading="lazy">
+      </figure>
       
-      <p>Desde o início, Lost escolheu avançar personagens antes de avançar mistérios. A própria estrutura de flashbacks deixa isso explícito: a cada episódio, não era um mistério que progredia, mas alguém que se tornava mais compreensível; quando a escotilha implode no fim da segunda temporada, o arco do “botão” se encerra ali — mas os personagens que lá estavam, seguem vivos, porque seus conflitos ainda não terminaram; Benjamin Linus deixa de ser apenas um mecanismo dos Outros para se tornar um dos personagens mais importantes da série, cheio de camadas, contradições e escolhas — mesmo que isso distorça retroativamente o mistério que cercava as motivações dele e dos Outros.</p>
+      <p>A própria estrutura de flashbacks, desde o início, deixa explícita essa decisão de avançar personagens antes dos mistérios. A cada episódio, não era um mistério que progredia, mas alguém que se tornava mais compreensível; quando a escotilha implode no fim da segunda temporada, o arco do “botão” se encerra ali — mas os personagens que lá estavam, seguem vivos, porque seus conflitos ainda não terminaram; Benjamin Linus deixa de ser apenas um mecanismo dos Outros para se tornar um dos personagens mais importantes da série, cheio de camadas, contradições e escolhas — mesmo que isso distorça retroativamente o mistério que cercava as motivações dele e dos Outros.</p>
     
-    <figure class="hero-gif" aria-hidden="true">
+      <figure class="hero-gif" aria-hidden="true">
         <img src="public/ben-linus.gif" alt="Jack — final" loading="lazy">
       </figure>
     
@@ -336,27 +181,166 @@
 
       <h4>O FIM</h4>
 
-      <p>No fim, Lost não termina quando eles saem da ilha. Termina quando param de precisar dela. E isso vale em dois níveis: os personagens, que podem finalmente seguir juntos, e o público, que pode seguir em frente levando o que importa. É um encerramento que não premia a inteligência do espectador, e sim o coração.</p>
+      <p>No fim, Lost não termina quando eles saem da ilha. Termina quando param de precisar dela. E isso vale em dois níveis: os personagens, que podem finalmente seguir juntos, e o público, que pode seguir em frente levando o que importa.</p>
         
       <p>Quem lê a série como uma história sobre pessoas e suas conexões, consegue guardar Lost com uma lembrança boa, quase íntima. Quem precisa que tudo seja explicado, nomeado e fechado tecnicamente às vezes fica preso, como se ainda estivesse esperando que a ilha se justifique.</p>
 
       <p>Quem queria puzzle, se frustra.<br>
       Quem acompanhou pessoas, se emociona.</p>
 
-      <p>Lost termina exatamente onde sempre esteve: em pessoas tentando dar sentido ao que viveram. E, quando finalmente conseguem, aprendendo a seguir em frente. Porque o que importou foi quem eles se tornaram e o que significaram uns para os outros. E, por extensão, o que significaram para nós.</p>
+      <p>Lost termina exatamente onde sempre esteve: em pessoas tentando dar sentido ao que viveram. E, quando finalmente conseguem, aprendendo a seguir em frente.</p>
 
       <figure class="hero-gif" aria-hidden="true">
         <img src="public/jack_the_end_sideways.gif" alt="Jack — final" loading="lazy">
       </figure>
+      
+      <p>É um encerramento que não premia a inteligência do espectador, e sim o coração. Porque o importante é quem eles se tornaram e o que significaram uns para os outros. E, por extensão, <b>o que significaram para nós.</b></p>
 
-    <div class="divider"></div>
+      
+      <figure class="hero-gif" aria-hidden="true">
+        <img src="public/happy-jin.gif" alt="Jack — final" loading="lazy">
+      </figure>
+
+      <div class="divider"></div>
 
     <h2 class="center">see you in another life, brother!</h2>
-
-    <figure class="hero-gif" aria-hidden="true">
-        <img src="public/happy-jin.gif" alt="Jack — final" loading="lazy">
-    </figure>
     
   </main>
+
+  <script>
+    (() => {
+      // Use paths RELATIVOS (sem barra no início) pra funcionar em /, subpasta e GitHub Pages.
+      // Como você confirmou que /public/music/... funciona, aqui usamos "public/music/..."
+      const playlist = [
+        "public/music/therees-no-place-like-home.mp3",
+        "public/music/moving-on.mp3",
+      ];
+
+      // --- cria o <audio> (bom pra debug e compatibilidade) ---
+      const audio = document.createElement("audio");
+      audio.preload = "auto";
+      audio.playsInline = true; // iOS
+      audio.loop = false;       // loop via playlist (ended -> next)
+      audio.muted = false;      // tenta tocar COM SOM no desktop
+      audio.volume = 1;
+      document.body.appendChild(audio);
+
+      let index = 0;
+
+      // --- botão mute/unmute (top-right) ---
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.id = "soundToggle";
+      btn.style.position = "fixed";
+      btn.style.top = "14px";
+      btn.style.right = "14px";
+      btn.style.zIndex = "99999";
+      btn.style.width = "44px";
+      btn.style.height = "44px";
+      btn.style.borderRadius = "12px";
+      btn.style.border = "1px solid rgba(255,255,255,.18)";
+      btn.style.background = "rgba(0,0,0,.35)";
+      btn.style.backdropFilter = "blur(8px)";
+      btn.style.webkitBackdropFilter = "blur(8px)";
+      btn.style.color = "#fff";
+      btn.style.fontSize = "18px";
+      btn.style.cursor = "pointer";
+      btn.style.display = "grid";
+      btn.style.placeItems = "center";
+      btn.style.boxShadow = "0 10px 30px rgba(0,0,0,.35)";
+      document.body.appendChild(btn);
+
+      function syncButton() {
+        btn.textContent = audio.muted ? "🔇" : "🔊";
+        btn.title = audio.muted ? "Som desligado (clique para ligar)" : "Som ligado (clique para mutar)";
+      }
+      syncButton();
+
+      // --- helpers ---
+      function log(...args) { console.log("[AUDIO]", ...args); }
+
+      async function tryPlay() {
+        try {
+          await audio.play();
+          log("PLAY OK:", audio.src, "muted:", audio.muted);
+          return true;
+        } catch (e) {
+          log("PLAY BLOQUEADO (precisa interação):", e?.name || e);
+          return false;
+        }
+      }
+
+      async function playTrack(i) {
+        index = i % playlist.length;
+        audio.src = playlist[index];
+        audio.currentTime = 0;
+
+        log("Carregando:", audio.src);
+
+        const ok = await tryPlay();
+        if (!ok) {
+          // fica aguardando gesto do usuário (mobile e/ou autoplay bloqueado)
+          await waitForFirstGestureAndPlay();
+        }
+      }
+
+      function nextTrack() {
+        playTrack(index + 1);
+      }
+
+      audio.addEventListener("ended", nextTrack);
+
+      audio.addEventListener("error", () => {
+        // Se der erro, quase sempre é 404/caminho errado
+        log("ERRO ao carregar:", audio.src);
+        log("TESTE abrindo isso no navegador:", new URL(audio.src, location.href).href);
+      });
+
+      // --- desbloqueio por gesto ---
+      let gestureArmed = false;
+
+      function armGestureOnce() {
+        if (gestureArmed) return;
+        gestureArmed = true;
+
+        const handler = async () => {
+          // qualquer clique/toque/tecla vai tentar tocar
+          const ok = await tryPlay();
+          if (ok) {
+            document.removeEventListener("pointerdown", handler);
+            document.removeEventListener("touchstart", handler);
+            document.removeEventListener("keydown", handler);
+            gestureArmed = false;
+          }
+        };
+
+        document.addEventListener("pointerdown", handler);
+        document.addEventListener("touchstart", handler, { passive: true });
+        document.addEventListener("keydown", handler);
+      }
+
+      async function waitForFirstGestureAndPlay() {
+        armGestureOnce();
+      }
+
+      // --- botão: mute/unmute + tenta tocar se estiver pausado ---
+      btn.addEventListener("click", async (e) => {
+        e.stopPropagation();
+        audio.muted = !audio.muted;
+        syncButton();
+
+        // Se o áudio estiver pausado, o clique no botão conta como interação -> tenta tocar
+        if (audio.paused) {
+          await tryPlay();
+        }
+      });
+
+      // --- START ---
+      window.addEventListener("load", () => {
+        playTrack(0);
+      });
+    })();
+</script>
+
 </body>
 </html>
