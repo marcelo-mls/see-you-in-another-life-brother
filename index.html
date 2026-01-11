@@ -207,104 +207,104 @@
     
   </main>
 
+  <footer class="site-footer" role="contentinfo" aria-label="Ações do artigo">
+    <div class="footer-actions">
+      <button class="footer-btn" id="btnTop" type="button">We Have to Go Back</button>
+
+      <a class="footer-btn" id="btnExtra"
+        href="https://www.youtube.com/watch?v=lMjPzV2RvO8"
+        target="_blank" rel="noopener noreferrer">
+        Extra: The New Man in Charge
+      </a>
+
+      <button class="footer-btn footer-btn--icon" id="btnShare"
+              type="button" aria-label="Copiar link do site" title="Copiar link">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"
+            fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="18" cy="5" r="3"></circle>
+          <circle cx="6" cy="12" r="3"></circle>
+          <circle cx="18" cy="19" r="3"></circle>
+          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+          <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+        </svg>
+      </button>
+    
+  </footer>
+
   <script>
     (() => {
-      // Use paths RELATIVOS (sem barra no início) pra funcionar em /, subpasta e GitHub Pages.
-      // Como você confirmou que /public/music/... funciona, aqui usamos "public/music/..."
+      // ====== Áudio (playlist + faixa especial do rodapé) ======
       const playlist = [
         "public/music/therees-no-place-like-home.mp3",
         "public/music/moving-on.mp3",
       ];
 
-      // --- cria o <audio> (bom pra debug e compatibilidade) ---
+      const specialTrack = "public/music/dharma-orientation.mp3";
+
       const audio = document.createElement("audio");
       audio.preload = "auto";
-      audio.playsInline = true; // iOS
-      audio.loop = false;       // loop via playlist (ended -> next)
-      audio.muted = false;      // tenta tocar COM SOM no desktop
+      audio.playsInline = true;
+      audio.loop = false;
+
+      // Começa mutado por padrão (melhor UX + autoplay mais provável).
+      // Respeita a última escolha do usuário.
+      const savedMuted = localStorage.getItem("siteMuted");
+      audio.muted = savedMuted === null ? true : (savedMuted === "true");
       audio.volume = 1;
+
       document.body.appendChild(audio);
 
       let index = 0;
+      let mode = "playlist"; // "playlist" | "special"
+      let gestureArmed = false;
+      let scrollRaf = null;
 
-      // --- botão mute/unmute (top-right) ---
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.id = "soundToggle";
-      btn.style.position = "fixed";
-      btn.style.top = "14px";
-      btn.style.right = "14px";
-      btn.style.zIndex = "99999";
-      btn.style.width = "44px";
-      btn.style.height = "44px";
-      btn.style.borderRadius = "12px";
-      btn.style.border = "1px solid rgba(255,255,255,.18)";
-      btn.style.background = "rgba(0,0,0,.35)";
-      btn.style.backdropFilter = "blur(8px)";
-      btn.style.webkitBackdropFilter = "blur(8px)";
-      btn.style.color = "#fff";
-      btn.style.fontSize = "18px";
-      btn.style.cursor = "pointer";
-      btn.style.display = "grid";
-      btn.style.placeItems = "center";
-      btn.style.boxShadow = "0 10px 30px rgba(0,0,0,.35)";
-      document.body.appendChild(btn);
+      // ====== Botão mute/unmute (top-right) ======
+      const soundBtn = document.createElement("button");
+      soundBtn.type = "button";
+      soundBtn.id = "soundToggle";
+      soundBtn.style.position = "fixed";
+      soundBtn.style.top = "14px";
+      soundBtn.style.right = "14px";
+      soundBtn.style.zIndex = "99999";
+      soundBtn.style.width = "44px";
+      soundBtn.style.height = "44px";
+      soundBtn.style.borderRadius = "12px";
+      soundBtn.style.border = "1px solid rgba(255,255,255,.18)";
+      soundBtn.style.background = "rgba(0,0,0,.35)";
+      soundBtn.style.backdropFilter = "blur(8px)";
+      soundBtn.style.webkitBackdropFilter = "blur(8px)";
+      soundBtn.style.color = "#fff";
+      soundBtn.style.fontSize = "18px";
+      soundBtn.style.cursor = "pointer";
+      soundBtn.style.display = "grid";
+      soundBtn.style.placeItems = "center";
+      soundBtn.style.boxShadow = "0 10px 30px rgba(0,0,0,.35)";
+      document.body.appendChild(soundBtn);
 
-      function syncButton() {
-        btn.textContent = audio.muted ? "🔇" : "🔊";
-        btn.title = audio.muted ? "Som desligado (clique para ligar)" : "Som ligado (clique para mutar)";
+      function syncSoundBtn() {
+        soundBtn.textContent = audio.muted ? "🔇" : "🔊";
+        soundBtn.title = audio.muted ? "Som desligado (clique para ligar)" : "Som ligado (clique para mutar)";
+        soundBtn.setAttribute("aria-label", soundBtn.title);
       }
-      syncButton();
-
-      // --- helpers ---
-      function log(...args) { console.log("[AUDIO]", ...args); }
+      syncSoundBtn();
 
       async function tryPlay() {
         try {
           await audio.play();
-          log("PLAY OK:", audio.src, "muted:", audio.muted);
           return true;
-        } catch (e) {
-          log("PLAY BLOQUEADO (precisa interação):", e?.name || e);
+        } catch {
+          armGestureOnce();
           return false;
         }
       }
-
-      async function playTrack(i) {
-        index = i % playlist.length;
-        audio.src = playlist[index];
-        audio.currentTime = 0;
-
-        log("Carregando:", audio.src);
-
-        const ok = await tryPlay();
-        if (!ok) {
-          // fica aguardando gesto do usuário (mobile e/ou autoplay bloqueado)
-          await waitForFirstGestureAndPlay();
-        }
-      }
-
-      function nextTrack() {
-        playTrack(index + 1);
-      }
-
-      audio.addEventListener("ended", nextTrack);
-
-      audio.addEventListener("error", () => {
-        // Se der erro, quase sempre é 404/caminho errado
-        log("ERRO ao carregar:", audio.src);
-        log("TESTE abrindo isso no navegador:", new URL(audio.src, location.href).href);
-      });
-
-      // --- desbloqueio por gesto ---
-      let gestureArmed = false;
 
       function armGestureOnce() {
         if (gestureArmed) return;
         gestureArmed = true;
 
         const handler = async () => {
-          // qualquer clique/toque/tecla vai tentar tocar
           const ok = await tryPlay();
           if (ok) {
             document.removeEventListener("pointerdown", handler);
@@ -319,28 +319,127 @@
         document.addEventListener("keydown", handler);
       }
 
-      async function waitForFirstGestureAndPlay() {
-        armGestureOnce();
+      async function playPlaylist(i = 0) {
+        mode = "playlist";
+        index = ((i % playlist.length) + playlist.length) % playlist.length;
+
+        audio.pause();
+        audio.src = playlist[index];
+        audio.currentTime = 0;
+        await tryPlay();
       }
 
-      // --- botão: mute/unmute + tenta tocar se estiver pausado ---
-      btn.addEventListener("click", async (e) => {
+      async function playSpecial() {
+        mode = "special";
+
+        audio.pause();
+        audio.src = specialTrack;
+        audio.currentTime = 0;
+        await tryPlay();
+      }
+
+      audio.addEventListener("ended", () => {
+        if (mode === "special") {
+          playPlaylist(0);
+        } else {
+          playPlaylist(index + 1);
+        }
+      });
+
+      soundBtn.addEventListener("click", async (e) => {
         e.stopPropagation();
         audio.muted = !audio.muted;
-        syncButton();
+        localStorage.setItem("siteMuted", String(audio.muted));
+        syncSoundBtn();
 
-        // Se o áudio estiver pausado, o clique no botão conta como interação -> tenta tocar
-        if (audio.paused) {
+        // Se desmutou e estava pausado, tenta tocar (clique conta como gesto).
+        if (!audio.muted && audio.paused) {
           await tryPlay();
         }
       });
 
-      // --- START ---
+      // ====== Rodapé: ações ======
+      const btnTop = document.getElementById("btnTop");
+      const btnShare = document.getElementById("btnShare");
+
+      function easeOutCubic(t) {
+        return 1 - Math.pow(1 - t, 3);
+      }
+
+      function scrollToTopSlow(durationMs = 16000) {
+        const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reduceMotion) {
+          window.scrollTo(0, 0);
+          return;
+        }
+
+        if (scrollRaf) cancelAnimationFrame(scrollRaf);
+
+        const startY = window.scrollY || document.documentElement.scrollTop || 0;
+        const start = performance.now();
+
+        const frame = (now) => {
+          const t = Math.min((now - start) / durationMs, 1);
+          const eased = easeOutCubic(t);
+          const y = Math.round(startY * (1 - eased));
+          window.scrollTo(0, y);
+
+          if (t < 1) scrollRaf = requestAnimationFrame(frame);
+        };
+
+        scrollRaf = requestAnimationFrame(frame);
+      }
+
+      if (btnTop) {
+        btnTop.addEventListener("click", async () => {
+          // ✅ Desmuta automaticamente ao clicar
+          audio.muted = false;
+          localStorage.setItem("siteMuted", "false");
+          syncSoundBtn();
+
+          // Interrompe a playlist e toca a "Dharma Orientation"
+          await playSpecial();
+          scrollToTopSlow(16000); // ou 15000, se você já mudou
+        });
+      }
+
+      async function copyToClipboard(text) {
+        // Clipboard API (https) / localhost
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+          return;
+        }
+
+        // Fallback
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        ta.setAttribute("readonly", "");
+        ta.style.position = "fixed";
+        ta.style.left = "-9999px";
+        ta.style.top = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+      }
+
+      if (btnShare) {
+        btnShare.addEventListener("click", async () => {
+          try {
+            await copyToClipboard(location.href);
+            btnShare.classList.add("is-copied");
+            setTimeout(() => btnShare.classList.remove("is-copied"), 1400);
+          } catch {}
+        });
+      }
+
+      // ====== Start ======
       window.addEventListener("load", () => {
-        playTrack(0);
+        playPlaylist(0);
       });
     })();
-</script>
+  </script>
+
 
 </body>
 </html>
